@@ -1,3 +1,9 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useCartStore } from '../store/useCartStore';
+import { FaTrash, FaWhatsapp, FaArrowRight } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 import { API_BASE_URL } from '../config';
 
 export default function Cart() {
