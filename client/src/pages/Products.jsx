@@ -4,6 +4,8 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useCartStore } from '../store/useCartStore';
 import toast from 'react-hot-toast';
 
+import { API_BASE_URL } from '../config';
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ export default function Products() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get('http://localhost:5000/api/products');
+        const { data } = await axios.get(`${API_BASE_URL}/products`);
         setProducts(data.data || []);
       } catch (err) {
         console.error('Error fetching products:', err);

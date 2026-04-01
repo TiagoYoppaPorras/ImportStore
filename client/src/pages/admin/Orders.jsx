@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { FaWhatsapp, FaSyncAlt, FaSearch, FaEye } from 'react-icons/fa';
+import { API_BASE_URL } from '../../config';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -15,7 +12,7 @@ export default function Orders() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get('http://localhost:5000/api/orders');
+      const { data } = await axios.get(`${API_BASE_URL}/orders`);
       setOrders(data.data || []);
     } catch (error) {
       toast.error('Error al cargar órdenes');
@@ -26,7 +23,7 @@ export default function Orders() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/${id}/status`, { status });
+      await axios.put(`${API_BASE_URL}/orders/${id}/status`, { status });
       toast.success('Estado actualizado');
       fetchOrders();
     } catch (error) {

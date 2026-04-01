@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { FaPlus, FaEdit, FaTrash, FaSearch, FaBox, FaDollarSign, FaLayerGroup, FaImage, FaTimes } from 'react-icons/fa';
+import { API_BASE_URL } from '../config';
 
 // CLOUDINARY CONFIG
 const CLOUDINARY_UPLOAD_PRESET = 'importstore'; 
@@ -40,7 +37,7 @@ export default function Dashboard() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get('http://localhost:5000/api/products');
+      const { data } = await axios.get(`${API_BASE_URL}/products`);
       setProducts(data.data || []);
     } catch (error) {
       toast.error('Error al cargar productos');
@@ -95,7 +92,7 @@ export default function Dashboard() {
     
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/upload`,
+        `${API_BASE_URL}/upload`,
         data
       );
       return res.data.secure_url;
@@ -124,10 +121,10 @@ export default function Dashboard() {
       };
       
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/products/${formData.id}`, payload);
+        await axios.put(`${API_BASE_URL}/products/${formData.id}`, payload);
         toast.success('Producto actualizado con éxito');
       } else {
-        await axios.post('http://localhost:5000/api/products', payload);
+        await axios.post(`${API_BASE_URL}/products`, payload);
         toast.success('Producto creado con éxito');
       }
       
@@ -144,7 +141,7 @@ export default function Dashboard() {
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de eliminar este producto?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await axios.delete(`${API_BASE_URL}/products/${id}`);
         toast.success('Producto eliminado');
         fetchProducts();
       } catch (error) {

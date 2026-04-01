@@ -1,9 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useCartStore } from '../store/useCartStore';
-import { FaTrash, FaWhatsapp, FaArrowRight } from 'react-icons/fa';
-import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../config';
 
 export default function Cart() {
   const { items, removeItem, clearCart, getTotal } = useCartStore();
@@ -17,7 +12,7 @@ export default function Cart() {
         shipping_city: 'Consultar por WhatsApp'
       };
 
-      const { data } = await axios.post('http://localhost:5000/api/orders', orderData);
+      const { data } = await axios.post(`${API_BASE_URL}/orders`, orderData);
       const orderNumber = data.data.order_number;
 
       // 2. Map items for WhatsApp message
