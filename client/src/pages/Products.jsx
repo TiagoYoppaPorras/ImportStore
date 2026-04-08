@@ -120,7 +120,7 @@ export default function Products() {
       {/* Sub-filters for Perfumes Gender */}
       {!loading && !error && activeCategory === "Perfumes" && (
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          {["Todos", "Masculino", "Femenino"].map(gen => (
+          {["Todos", "Masculino", "Femenino", "Unisex"].map(gen => (
             <button
               key={gen}
               onClick={() => setActiveGender(gen)}
@@ -137,7 +137,7 @@ export default function Products() {
                 transition: 'all var(--transition-fast)'
               }}
             >
-              {gen === "Todos" ? "Todos" : gen === "Masculino" ? "Hombre" : "Mujer"}
+              {gen === "Todos" ? "Todos" : gen === "Masculino" ? "Hombre" : gen === "Femenino" ? "Mujer" : "Unisex"}
             </button>
           ))}
         </div>
