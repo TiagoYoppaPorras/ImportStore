@@ -31,28 +31,28 @@ class ProductRepository {
     }
 
     static async create(data) {
-        const { category_id, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url } = data;
+        const { category_id, gender, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url } = data;
         const query = `
             INSERT INTO products 
-            (category_id, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (category_id, gender, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const [result] = await pool.execute(query, [
-            category_id, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url || null
+            category_id, gender || 'Unisex', sku, name, slug, description, short_description, retail_price, wholesale_price, stock, main_image_url || null
         ]);
         return { id: result.insertId, ...data };
     }
 
     static async update(id, data) {
-        const { category_id, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, is_active, main_image_url } = data;
+        const { category_id, gender, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, is_active, main_image_url } = data;
         const query = `
             UPDATE products SET 
-            category_id = ?, sku = ?, name = ?, slug = ?, description = ?, 
+            category_id = ?, gender = ?, sku = ?, name = ?, slug = ?, description = ?, 
             short_description = ?, retail_price = ?, wholesale_price = ?, stock = ?, is_active = ?, main_image_url = ?
             WHERE id = ?
         `;
         await pool.execute(query, [
-            category_id, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, is_active, main_image_url, id
+            category_id, gender, sku, name, slug, description, short_description, retail_price, wholesale_price, stock, is_active, main_image_url, id
         ]);
         return this.findById(id);
     }

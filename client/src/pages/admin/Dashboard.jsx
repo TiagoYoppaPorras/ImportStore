@@ -23,6 +23,7 @@ export default function Dashboard() {
     id: null,
     name: '',
     category_id: 1,
+    gender: 'Unisex',
     sku: '',
     retail_price: '',
     wholesale_price: '',
@@ -55,6 +56,7 @@ export default function Dashboard() {
       setIsEditing(true);
       setFormData({
         ...product,
+        gender: product.gender || 'Unisex',
         retail_price: Number(product.retail_price) || 0,
         wholesale_price: Number(product.wholesale_price) || 0,
         stock: Number(product.stock) || 0
@@ -65,6 +67,7 @@ export default function Dashboard() {
       setFormData({
         name: '',
         category_id: 1,
+        gender: 'Unisex',
         sku: '',
         retail_price: '',
         wholesale_price: '',
@@ -310,6 +313,22 @@ export default function Dashboard() {
                   <option value={2} style={{background: '#1a1a1a'}}>Cosméticos</option>
                 </select>
               </div>
+
+              {/* Conditional Gender Field for Perfumes (ID 3) */}
+              {Number(formData.category_id) === 3 && (
+                <div>
+                  <label style={labelStyle}>Género</label>
+                  <select 
+                    value={formData.gender}
+                    onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                    style={inputStyle}
+                  >
+                    <option value="Unisex" style={{background: '#1a1a1a'}}>Unisex</option>
+                    <option value="Masculino" style={{background: '#1a1a1a'}}>Masculino</option>
+                    <option value="Femenino" style={{background: '#1a1a1a'}}>Femenino</option>
+                  </select>
+                </div>
+              )}
 
               <div>
                 <label style={labelStyle}>Precio Minorista ($)</label>

@@ -47,6 +47,7 @@ export default function Products() {
   };
 
   const [activeCategory, setActiveCategory] = useState("Gadgets");
+  const [activeGender, setActiveGender] = useState("Todos");
 
   // Group products by category
   const productsByCategory = products.reduce((acc, product) => {
@@ -69,7 +70,12 @@ export default function Products() {
   });
 
   // Only get the products for the active tab
-  const activeProducts = productsByCategory[activeCategory] || [];
+  let activeProducts = productsByCategory[activeCategory] || [];
+
+  // Filter by gender if category is Perfumes
+  if (activeCategory === "Perfumes" && activeGender !== "Todos") {
+    activeProducts = activeProducts.filter(p => p.gender === activeGender);
+  }
 
   return (
     <div className="container" style={{ padding: '4rem 1.5rem' }}>
@@ -98,12 +104,41 @@ export default function Products() {
           {categoryOrder.map(cat => (
              <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setActiveGender("Todos"); // Reset gender filter when changing categories
+                }}
                 className={activeCategory === cat ? "btn btn-primary" : "btn btn-outline"}
                 style={{ padding: '8px 24px', borderRadius: '50px', fontSize: '0.95rem' }}
              >
                 {cat}
              </button>
+          ))}
+        </div>
+      )}
+
+      {/* Sub-filters for Perfumes Gender */}
+      {!loading && !error && activeCategory === "Perfumes" && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+          {["Todos", "Masculino", "Femenino"].map(gen => (
+            <button
+              key={gen}
+              onClick={() => setActiveGender(gen)}
+              style={{
+                padding: '6px 16px',
+                borderRadius: 'var(--radius-md)',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                border: '1px solid',
+                borderColor: activeGender === gen ? 'var(--accent-primary)' : 'rgba(255,255,255,0.1)',
+                background: activeGender === gen ? 'rgba(212,175,55,0.1)' : 'transparent',
+                color: activeGender === gen ? 'var(--accent-primary)' : 'var(--text-tertiary)',
+                transition: 'all var(--transition-fast)'
+              }}
+            >
+              {gen === "Todos" ? "Todos" : gen === "Masculino" ? "Hombre" : "Mujer"}
+            </button>
           ))}
         </div>
       )}
