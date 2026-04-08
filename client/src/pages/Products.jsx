@@ -190,7 +190,6 @@ export default function Products() {
                     <span style={{ fontSize: '0.75rem', color: 'var(--accent-primary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>
                       {product.category_name}
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: '500' }}>SKU: {product.sku}</span>
                   </div>
 
                   <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem', lineHeight: '1.3', fontWeight: '700' }}>{product.name}</h3>
