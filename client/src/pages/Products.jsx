@@ -93,9 +93,9 @@ export default function Products() {
       )}
 
       {/* Category Tabs */}
-      {!loading && !error && products.length > 0 && (
+      {!loading && !error && (
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
-          {sortedCategories.map(cat => (
+          {categoryOrder.map(cat => (
              <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
