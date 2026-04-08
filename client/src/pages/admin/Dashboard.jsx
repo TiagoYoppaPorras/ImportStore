@@ -306,8 +306,8 @@ export default function Dashboard() {
                   style={inputStyle}
                 >
                   <option value={1} style={{background: '#1a1a1a'}}>Gadgets</option>
-                  <option value={2} style={{background: '#1a1a1a'}}>Perfumes</option>
-                  <option value={3} style={{background: '#1a1a1a'}}>Cosméticos</option>
+                  <option value={3} style={{background: '#1a1a1a'}}>Perfumes</option>
+                  <option value={2} style={{background: '#1a1a1a'}}>Cosméticos</option>
                 </select>
               </div>
 
